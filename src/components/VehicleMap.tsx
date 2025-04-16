@@ -84,13 +84,14 @@ export default function VehicleMap({ vehicles }: VehicleMapProps) {
   }, []);
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
-      <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Ubicación de Vehículos</h2>
-      <div className="h-[400px] rounded-lg overflow-hidden">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-3 sm:p-4">
+      <h2 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-2 sm:mb-4">Ubicación de Vehículos</h2>
+      <div className="h-[250px] sm:h-[350px] md:h-[400px] rounded-lg overflow-hidden">
         <MapContainer
           center={[center.lat, center.lng]}
-          zoom={6}
+          zoom={5}
           className="h-full w-full"
+          zoomControl={false}
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -106,19 +107,19 @@ export default function VehicleMap({ vehicles }: VehicleMapProps) {
                 },
               }}
             >
-              <Popup>
-                <div className="p-2 dark:bg-gray-800 dark:text-white">
-                  <h3 className="font-semibold">{vehicle.name}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Conductor: {vehicle.driver}</p>
-                  <p className={`text-sm font-medium ${statusColors[vehicle.status]}`}>
+              <Popup className="leaflet-popup-custom">
+                <div className="p-2 dark:bg-gray-800 dark:text-white max-w-[200px] sm:max-w-[250px]">
+                  <h3 className="font-semibold text-sm sm:text-base">{vehicle.name}</h3>
+                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Conductor: {vehicle.driver}</p>
+                  <p className={`text-xs sm:text-sm font-medium ${statusColors[vehicle.status]}`}>
                     {statusTranslations[vehicle.status]}
                   </p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                     Combustible: {vehicle.fuelLevel}%
                   </p>
                   {activeDeliveries.length > 0 && (
-                    <div className="mt-2">
-                      <p className="text-sm font-medium">Entrega en curso:</p>
+                    <div className="mt-1 sm:mt-2">
+                      <p className="text-xs sm:text-sm font-medium">Entrega en curso:</p>
                       <p className="text-xs text-gray-600 dark:text-gray-400">{activeDeliveries[0].destination}</p>
                     </div>
                   )}
@@ -134,12 +135,12 @@ export default function VehicleMap({ vehicles }: VehicleMapProps) {
                 key={delivery.id}
                 position={delivery.route[delivery.route.length - 1]}
               >
-                <Popup>
-                  <div className="p-2 dark:bg-gray-800 dark:text-white">
-                    <h3 className="font-semibold">Destino de Entrega</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">{delivery.destination}</p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">Cliente: {delivery.customer}</p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                <Popup className="leaflet-popup-custom">
+                  <div className="p-2 dark:bg-gray-800 dark:text-white max-w-[200px] sm:max-w-[250px]">
+                    <h3 className="font-semibold text-sm sm:text-base">Destino de Entrega</h3>
+                    <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">{delivery.destination}</p>
+                    <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Cliente: {delivery.customer}</p>
+                    <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                       ETA: {delivery.estimatedArrival ? format(new Date(delivery.estimatedArrival), 'HH:mm', { locale: es }) : 'No disponible'}
                     </p>
                   </div>
@@ -160,7 +161,7 @@ export default function VehicleMap({ vehicles }: VehicleMapProps) {
           ))}
         </MapContainer>
       </div>
-      <div className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+      <div className="mt-2 sm:mt-4 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
         <p>Haga clic en un vehículo para ver más detalles y sus rutas de entrega activas.</p>
       </div>
     </div>

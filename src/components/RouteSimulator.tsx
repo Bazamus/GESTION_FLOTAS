@@ -96,11 +96,11 @@ export default function RouteSimulator({ vehicles, onVehiclePositionUpdate }: Ro
 
   if (vehiclesWithRoutes.length === 0) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 mb-4">
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-3 sm:p-4 mb-4">
+        <h2 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-2">
           Simulador de Rutas
         </h2>
-        <p className="text-gray-500 dark:text-gray-400 text-center py-4">
+        <p className="text-sm text-gray-500 dark:text-gray-400 text-center py-3 sm:py-4">
           No hay vehículos activos con rutas disponibles para simular
         </p>
       </div>
@@ -108,18 +108,18 @@ export default function RouteSimulator({ vehicles, onVehiclePositionUpdate }: Ro
   }
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 mb-4">
-      <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-3 sm:p-4 mb-4">
+      <h2 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-3 sm:mb-4">
         Simulador de Rutas
       </h2>
       
-      <div className="mb-4">
-        <label htmlFor="vehicle-select" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+      <div className="mb-3 sm:mb-4">
+        <label htmlFor="vehicle-select" className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 sm:mb-2">
           Seleccionar Vehículo
         </label>
         <select
           id="vehicle-select"
-          className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+          className="w-full p-1.5 sm:p-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
           value={selectedVehicleId || ''}
           onChange={(e) => {
             resetSimulation();
@@ -137,13 +137,13 @@ export default function RouteSimulator({ vehicles, onVehiclePositionUpdate }: Ro
       
       {selectedVehicleId && (
         <>
-          <div className="mb-4">
-            <label htmlFor="speed-select" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <div className="mb-3 sm:mb-4">
+            <label htmlFor="speed-select" className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 sm:mb-2">
               Velocidad de Simulación
             </label>
             <select
               id="speed-select"
-              className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+              className="w-full p-1.5 sm:p-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
               value={simulationSpeed}
               onChange={(e) => setSimulationSpeed(Number(e.target.value))}
             >
@@ -154,34 +154,34 @@ export default function RouteSimulator({ vehicles, onVehiclePositionUpdate }: Ro
             </select>
           </div>
           
-          <div className="flex items-center mb-4">
-            <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mr-4">
+          <div className="flex items-center mb-3 sm:mb-4">
+            <div className="w-full bg-gray-200 rounded-full h-2 sm:h-2.5 dark:bg-gray-700 mr-2 sm:mr-4">
               <div 
-                className="bg-blue-600 h-2.5 rounded-full" 
+                className="bg-blue-600 h-2 sm:h-2.5 rounded-full" 
                 style={{ width: `${progress * 100}%` }}
               ></div>
             </div>
-            <span className="text-sm text-gray-500 dark:text-gray-400 w-12">
+            <span className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 w-10 sm:w-12">
               {Math.round(progress * 100)}%
             </span>
           </div>
           
-          <div className="flex space-x-2">
+          <div className="flex flex-wrap sm:flex-nowrap gap-2">
             <button
               onClick={() => setIsSimulating(!isSimulating)}
-              className={`flex items-center justify-center px-4 py-2 rounded-lg text-white ${
+              className={`flex items-center justify-center px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-white text-xs sm:text-sm flex-1 ${
                 isSimulating ? 'bg-yellow-500 hover:bg-yellow-600' : 'bg-green-500 hover:bg-green-600'
               }`}
               disabled={progress >= 1}
             >
               {isSimulating ? (
                 <>
-                  <Pause className="w-4 h-4 mr-2" />
+                  <Pause className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
                   Pausar
                 </>
               ) : (
                 <>
-                  <Play className="w-4 h-4 mr-2" />
+                  <Play className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
                   {progress > 0 ? 'Continuar' : 'Iniciar'}
                 </>
               )}
@@ -189,14 +189,14 @@ export default function RouteSimulator({ vehicles, onVehiclePositionUpdate }: Ro
             
             <button
               onClick={resetSimulation}
-              className="flex items-center justify-center px-4 py-2 bg-gray-500 hover:bg-gray-600 rounded-lg text-white"
+              className="flex items-center justify-center px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-500 hover:bg-gray-600 rounded-lg text-white text-xs sm:text-sm flex-1"
             >
-              <RotateCcw className="w-4 h-4 mr-2" />
+              <RotateCcw className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
               Reiniciar
             </button>
           </div>
           
-          <div className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+          <div className="mt-3 sm:mt-4 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
             <p>Simulando ruta de entrega para el vehículo seleccionado. Observe el movimiento en el mapa.</p>
           </div>
         </>
